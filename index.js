@@ -1,5 +1,7 @@
 var canvas, ctx, center, velocity, prevSeconds, ballR, mouseVelocity, mousePos;
 
+var ball, cat, background, sand;
+
 var dampening = 0.8;
 var gravity = 9.8;
 
@@ -7,6 +9,18 @@ function init() {
   canvas = document.getElementById('tutorial');
   canvas.width = window.innerWidth - 50;
   canvas.height = window.innerHeight - 50;
+
+  ball = new Image();
+  ball.src = "/assets/ball.png";
+
+  cat = new Image();
+  cat.src = "/assets/cat02.png";
+
+  background = new Image();
+  background.src = "/assets/background.png";
+
+  sand = new Image();
+  sand.src = "/assets/sand.png";
 
   mouseVelocity = [0, 0];
   mousePos = [0, 0];
@@ -25,6 +39,8 @@ function init() {
   ballR = 0.05;
 
   prevSeconds = Date.now() * 0.001;
+
+  ctx = canvas.getContext('2d');
 
   requestAnimationFrame(draw);
 }
@@ -61,20 +77,25 @@ function draw(){
     }
     center[0] = side - side * ballR;
     velocity[0] = -velocity[0] * dampening;
-    console.log(center);
   }
 
   ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  var time = new Date();
-  ctx.beginPath();
-  ctx.arc(center[0] * canvas.width, center[1] * canvas.height, ballR * canvas.width, 0, 2 * Math.PI);
-  ctx.fillStyle = "rgb(200,0,0)";
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(0,153,255,0.4)';
-  ctx.stroke();
-  ctx.closePath();
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  
+  ctx.drawImage(sand, 0, canvas.height - sand.height, canvas.width, sand.height);
+  ctx.drawImage(ball, center[0] * canvas.width, center[1] * canvas.height, ballR * canvas.width, ballR * canvas.width);
+  ctx.drawImage(cat, mousePos[0] * canvas.width - cat.width * 0.5, mousePos[1] * canvas.height - cat.height * 0.5, cat.width, cat.height);
+
+
+  // ctx.beginPath();
+  // ctx.arc(center[0] * canvas.width, center[1] * canvas.height, ballR * canvas.width, 0, 2 * Math.PI);
+  // ctx.fillStyle = "rgb(200,0,0)";
+  // ctx.fill();
+  // ctx.strokeStyle = 'rgba(0,153,255,0.4)';
+  // ctx.stroke();
+  // ctx.closePath();
 
 
   requestAnimationFrame(draw);
