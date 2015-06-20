@@ -2,11 +2,15 @@ var canvas, ctx, center, velocity, prevSeconds, ballR, mouseVelocity, mousePos;
 
 var ball, cat, background, sand;
 
+var assets = "assets/";
+
 var dampening = 0.8;
 var gravity = 9.8;
 
+var lastKickTime = -10;
+var kickDuration = 0.5;
+
 function init() {
-  var assets = "assets/";
 
   canvas = document.getElementById('tutorial');
   canvas.width = window.innerWidth - 50;
@@ -60,6 +64,14 @@ function draw(){
   if (length(mousePos, center) < ballR * 2) {
     velocity[0] += mouseVelocity[0];
     velocity[1] += mouseVelocity[1];
+    lastKickTime = seconds;
+  }
+
+  if(seconds - lastKickTime < kickDuration) {
+    cat.src = assets + "cat02_kick.png";
+  }
+  else {
+    cat.src = assets + "cat02.png";
   }
 
   if(center[1] > 1.0 || center[1] < 0.0) {
