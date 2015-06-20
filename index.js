@@ -5,6 +5,8 @@ var gravity = 9.8;
 
 function init() {
   canvas = document.getElementById('tutorial');
+  canvas.width = window.innerWidth - 50;
+  canvas.height = window.innerHeight - 50;
 
   mouseVelocity = [0, 0];
   mousePos = [0, 0];
@@ -53,7 +55,7 @@ function draw(){
   }
 
   if(center[0] > 1.0 || center[0] < 0.0) {
-    var side = 0.0;
+    var side = 0.1;
     if(center[0] > 1.0) {
       side = 1.0;
     }
