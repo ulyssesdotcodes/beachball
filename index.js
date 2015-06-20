@@ -6,21 +6,23 @@ var dampening = 0.8;
 var gravity = 9.8;
 
 function init() {
+  var assets = "assets/";
+
   canvas = document.getElementById('tutorial');
   canvas.width = window.innerWidth - 50;
   canvas.height = window.innerHeight - 50;
 
   ball = new Image();
-  ball.src = "/assets/ball.png";
+  ball.src = assets + "ball.png";
 
   cat = new Image();
-  cat.src = "/assets/cat02.png";
+  cat.src = assets + "cat02.png";
 
   background = new Image();
-  background.src = "/assets/background.png";
+  background.src = assets + "background.png";
 
   sand = new Image();
-  sand.src = "/assets/sand.png";
+  sand.src = assets + "sand.png";
 
   mouseVelocity = [0, 0];
   mousePos = [0, 0];
@@ -83,7 +85,7 @@ function draw(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-  
+
   ctx.drawImage(sand, 0, canvas.height - sand.height, canvas.width, sand.height);
   ctx.drawImage(ball, center[0] * canvas.width, center[1] * canvas.height, ballR * canvas.width, ballR * canvas.width);
   ctx.drawImage(cat, mousePos[0] * canvas.width - cat.width * 0.5, mousePos[1] * canvas.height - cat.height * 0.5, cat.width, cat.height);
